@@ -7,6 +7,8 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let drawing = false;
+ctx.lineWidth = 0.4; // border on circles
+// ctx.globalCompositeOperation = 'luminosity';
 
 class Root {
   constructor(x, y){
@@ -98,5 +100,12 @@ window.addEventListener('mousemove', function(e) {
 })
 
 // when mouse pressed they should draw
-window.addEventListener('mousedown', () => { drawing=true });
+window.addEventListener('mousedown', (e) => {
+  drawing=true;
+  for (let i=0; i < 30; i++) { // draw multiple when click
+    const root = new Root(e.x, e.y);
+    root.update();
+  }
+});
+
 window.addEventListener('mouseup', () => { drawing=false });
